@@ -27,4 +27,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"Sainzaya"}
+    return {"Andrews a hoe"}
