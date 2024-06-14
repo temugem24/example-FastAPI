@@ -27,4 +27,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"Welcome to the home page!!!"}
+    return {"message": "Welcome to the home page"}

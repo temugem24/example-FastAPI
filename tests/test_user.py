@@ -9,3 +9,6 @@ def test_root():
     res = client.get("/")
     assert res.json() == ['Welcome to the home page!!!']
     assert res.status_code == 200 
+
+def test_create_user():
+    
