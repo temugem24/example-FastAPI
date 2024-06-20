@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from app.routers import posts, users, auth, vote
 from fastapi.middleware.cors import CORSMiddleware
+from .database import engine, Base
 
 
-# from .database import engine
-# models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -27,4 +27,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the home page"}
+    return {"message": "Home Page"}
