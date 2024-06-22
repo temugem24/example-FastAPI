@@ -48,6 +48,12 @@ jobs:
         run: docker logs $(docker ps -q --filter "name=postgres")
       - name: Install ping utility
         run: sudo apt-get update && sudo apt-get install -y iputils-ping
+      - name: List Docker networks
+        run: docker network ls
+      - name: Inspect Docker network
+        run: docker network inspect $(docker network ls --filter name=github_ --format "{{.ID}}")
+      - name: Inspect PostgreSQL container network settings
+        run: docker inspect $(docker ps -q --filter "name=postgres")
       - name: Debug Hostname Resolution
         run: ping -c 4 postgres
       - name: Print environment variables
