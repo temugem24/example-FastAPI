@@ -40,8 +40,10 @@ jobs:
         run: python -m pip install --upgrade pip
       - name: install all dependencies
         run: pip install -r requirements.txt
-      - name: Print env variables
-        run: printenv
+      - name: Check PostgreSQL service status
+        run: docker ps
+      - name: Check PostgreSQL logs
+        run: docker logs $(docker ps -q --filter "name=postgres")
       - name: Wait for PostgreSQL to be ready
         run: sleep 15
       - name: run PyTest
