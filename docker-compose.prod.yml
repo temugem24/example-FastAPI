@@ -10,7 +10,7 @@ services:
       - postgres-db:/var/lib/postgresql/data
 
   api:
-    image: temugemax21/fastapi
+    image: temugemax21/fastapi:latest
     depends_on:
       - postgres
     ports:
