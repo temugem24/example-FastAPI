@@ -9,7 +9,7 @@ from app import models
 import pytest
 #mock dependancy 
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}'f'@{settings.database_hostname}:{settings.database_port}/{settings.database_name}-test"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@postgres:{settings.database_port}/{settings.database_name}-test"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
