@@ -9,7 +9,7 @@ from app import models
 import pytest
 #mock dependancy 
 
-SQLALCHEMY_TESTING_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}'f'@{settings.database_hostname}:{settings.database_port}/fastapi-test"
+SQLALCHEMY_TESTING_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}'f'@{settings.database_hostname}:{settings.database_port}/fastapi"
 engine = create_engine(SQLALCHEMY_TESTING_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
