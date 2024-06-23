@@ -27,4 +27,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "Home Page"}
+    return {"message": "Succesfully Deployed using heroku"}
