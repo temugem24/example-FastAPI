@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.config import settings
-from app.database import get_db, Base
+from app.database import get_db
 from app import main
 from fastapi.testclient import TestClient
 from app.oauth2 import create_access_token
@@ -9,14 +9,15 @@ from app import models
 import pytest
 #mock dependancy 
 
-SQLALCHEMY_TESTING_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}'f'@{settings.database_hostname}:{settings.database_port}/fastapi"
+SQLALCHEMY_TESTING_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}"f"@{settings.database_hostname}:{settings.database_port}/{settings.database_name}-test"
 engine = create_engine(SQLALCHEMY_TESTING_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Base = declarative_base()
 
 @pytest.fixture
 def session():
-    Base.metadata.drop_all(bind=engine)
-    Base.metadata.create_all(bind=engine)
+    models.Base.metadata.drop_all(bind=engine)
+    models.Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
     try:
         yield db
@@ -39,7 +40,7 @@ def client(session):
 @pytest.fixture
 def test_user(client):
     user_data = {"email": "orange@gmail.com",
-                  "password": "password123"}
+                  "password": "password"}
     res = client.post("/users/", json=user_data)
 
     assert res.status_code == 201
