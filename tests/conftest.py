@@ -7,17 +7,19 @@ from fastapi.testclient import TestClient
 from app.oauth2 import create_access_token
 from app import models
 import pytest
+from app.models import Base
 #mock dependancy 
 
 SQLALCHEMY_TESTING_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}-test"
+print("SQLALCHEMY_TESTING_DATABASE_URL:", SQLALCHEMY_TESTING_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_TESTING_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Base = declarative_base()
 
 @pytest.fixture
 def session():
-    models.Base.metadata.drop_all(bind=engine)
-    models.Base.metadata.create_all(bind=engine)
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
     try:
         yield db
